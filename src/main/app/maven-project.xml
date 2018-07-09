@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+
+
+
+
+
+
+
+
+
 <mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16,7 +26,7 @@ http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/
     </spring:beans>
     <db:derby-config name="Derby_Configuration" url="jdbc:derby:memory:muleEmbeddedDB;create=true" doc:name="Derby Configuration"/>
     <jms:activemq-connector name="Active_MQ" brokerURL="vm://localhost" validateConnections="true" doc:name="Active MQ"/>
-    <flow name="logFlights">
+           <flow name="logFlights">
         <jms:inbound-endpoint queue="flights" connector-ref="Active_MQ" doc:name="JMS:flights">
             <jms:transaction action="NONE"/>
         </jms:inbound-endpoint>
