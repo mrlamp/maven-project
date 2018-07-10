@@ -43,7 +43,6 @@ http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/
 			connector-ref="Active_MQ"
 			doc:name="JMS:flights"
 		>
-			<jms:transaction action="NONE" />
 		</jms:inbound-endpoint>
 		<logger
 			message="#[message.payload]"
@@ -62,12 +61,12 @@ http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/
 			<db:parameterized-query><![CDATA[select * from flights]]></db:parameterized-query>
 		</db:select>
 		<object-to-string-transformer doc:name="Object to String" />
+        <set-property propertyName="#[&quot;Content-Type&quot;]" value="#[&quot;application/json&quot;]" doc:name="Property"/>
 		<jms:outbound-endpoint
 			queue="flights"
 			connector-ref="Active_MQ"
 			doc:name="JMS:flights"
 		>
-			<jms:transaction action="NONE" />
 		</jms:outbound-endpoint>
 	</flow>
 	<flow name="mavenFlow">
