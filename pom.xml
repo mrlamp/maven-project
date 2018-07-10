@@ -1,26 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mulesoft.training</groupId>
-	<artifactId>maven-project</artifactId>
+	<artifactId>ha-maven-project-jms-sandbox-fl</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule</packaging>
 	<name>Mule maven-project Application</name>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 		<mule.version>3.9.0</mule.version>
 		<mule.tools.version>1.2</mule.tools.version>
 		<derby_version>10.14.2.0</derby_version>
-		<!-- <activemq_version>5.15.4</activemq_version>-->
+		<!-- <activemq_version>5.15.4</activemq_version> -->
+		<uid>fei_li_adv</uid>
+		<pwd></pwd>
 	</properties>
-
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<deploymentType>cloudhub</deploymentType>
+					<muleVersion>${mule.version}</muleVersion>
+					<username>${uid}</username>
+					<password>${pwd}</password>
+					<workerType>Micro</workerType>
+					<redeploy>true</redeploy>
+					<environment>Sandbox</environment>
+				</configuration>
+				<executions>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-app-maven-plugin</artifactId>
@@ -59,7 +83,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<!-- Mule Dependencies -->
 	<dependencies>
 		<!-- Xml configuration -->
@@ -120,33 +143,27 @@
 			<version>${mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- non-mule libraries -->
-
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
 			<version>${derby_version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-client</artifactId>
 			<version>5.15.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-broker</artifactId>
 			<version>5.15.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-kahadb-store</artifactId>
 			<version>5.15.4</version>
 		</dependency>
-
 		<!-- for testing -->
 		<dependency>
 			<groupId>org.mule.tests</groupId>
@@ -185,7 +202,6 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
 	<repositories>
 		<repository>
 			<id>Central</id>
@@ -211,5 +227,4 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
 </project>
